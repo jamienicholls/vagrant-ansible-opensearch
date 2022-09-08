@@ -1,0 +1,22 @@
+controller ansible_connection=local
+m1 ansible_host=10.0.10.10 ansible_user=vagrant ip=10.0.10.10 roles=data,master ansible_ssh_private_key_file=/vagrant/.vagrant/machines/m1/virtualbox/private_key domain_name=vagrant
+m2 ansible_host=10.0.10.11 ansible_user=vagrant ip=10.0.10.11 roles=data,master ansible_ssh_private_key_file=/vagrant/.vagrant/machines/m2/virtualbox/private_key domain_name=vagrant
+i1 ansible_host=10.0.10.12 ansible_user=vagrant ip=10.0.10.12 roles=data,ingest ansible_ssh_private_key_file=/vagrant/.vagrant/machines/i1/virtualbox/private_key domain_name=vagrant
+i2 ansible_host=10.0.10.13 ansible_user=vagrant ip=10.0.10.13 roles=data,ingest ansible_ssh_private_key_file=/vagrant/.vagrant/machines/i2/virtualbox/private_key domain_name=vagrant
+
+dashboards1 ansible_host=10.0.10.14 ansible_user=vagrant ip=10.0.10.14 ansible_ssh_private_key_file=/vagrant/.vagrant/machines/dashboards1/virtualbox/private_key domain_name=vagrant
+
+# List all the nodes in the os cluster
+[os-cluster]
+m1
+m2
+i1
+i2
+
+# List all the Master eligible nodes under this group
+[master]
+m1
+m2
+
+[dashboards]
+dashboards1

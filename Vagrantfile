@@ -43,13 +43,12 @@ Vagrant.configure("2") do |config|
     machine.vm.network "private_network", ip: "10.0.10.15"
     machine.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=700,fmode=700"]
     machine.vm.provision :ansible_local do |ansible|
-      ansible.provisioning_path = "/vagrant/ansible-playbook/"
-      ansible.playbook          = "opensearch.yml"
+      ansible.playbook          = "/vagrant/ansible-playbook/opensearch.yml"
       ansible.verbose           = true
       ansible.install           = true
       ansible.sudo              = true
       ansible.limit             = "all" # or only "nodes" group, etc.
-      ansible.inventory_path    = "../hosts"
+      ansible.inventory_path    = "/vagrant/inventories/opensearch"
     end
   end
 end
