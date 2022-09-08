@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "generic/centos7"
 
   config.vm.define "m1" do |machine|
+    machine.vm.provision :shell, inline: "yum install java-1.8.0-openjdk -y"
     machine.vm.network "private_network", ip: "10.0.10.10"
     machine.vm.hostname = "m1"
   end
@@ -42,6 +43,7 @@ Vagrant.configure("2") do |config|
   config.vm.define 'controller' do |machine|
     machine.vm.network "private_network", ip: "10.0.10.15"
     machine.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=700,fmode=700"]
+    machine.vm.provision :shell, inline: "yum install java-1.8.0-openjdk -y"
     machine.vm.provision :ansible_local do |ansible|
       ansible.playbook          = "/vagrant/ansible-playbook/opensearch.yml"
       ansible.verbose           = true
