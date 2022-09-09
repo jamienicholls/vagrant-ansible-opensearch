@@ -20,8 +20,8 @@ domain_name: example.com
 
 # Java memory heap values(GB) for opensearch
 # You can change it based on server specs
-xms_value: 2
-xmx_value: 2
+xms_value: 1
+xmx_value: 1
 
 # Cluster type whether its single-node or multi-node
 cluster_type: multi-node
@@ -56,6 +56,7 @@ oidc:
   client_secret: "00000000-0000-0000-0000-000000000000"
 
 # Overwrite demo configurations with your own
+#copy_custom_security_configs: false
 copy_custom_security_configs: false
 
 # To override demo configurations, you can use your own configuration files.
