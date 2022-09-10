@@ -12,30 +12,39 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "generic/centos7"
+  config.vm.box = "generic/rocky8"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 3072
+    v.cpus = 2
+  end
 
   config.vm.define "m1" do |machine|
-    machine.vm.provision :shell, inline: "yum install java-1.8.0-openjdk -y"
+    machine.vm.provision :shell, inline: "sudo systemctl stop firewalld"
     machine.vm.network "private_network", ip: "10.0.10.10"
     machine.vm.hostname = "m1"
   end
  
   config.vm.define "m2" do |machine|
+    machine.vm.provision :shell, inline: "sudo systemctl stop firewalld"
     machine.vm.network "private_network", ip: "10.0.10.11"
     machine.vm.hostname = "m2"
   end
 
   config.vm.define "i1" do |machine|
+    machine.vm.provision :shell, inline: "sudo systemctl stop firewalld"
     machine.vm.network "private_network", ip: "10.0.10.12"
     machine.vm.hostname = "i1"
   end
  
   config.vm.define "i2" do |machine|
+    machine.vm.provision :shell, inline: "sudo systemctl stop firewalld"
     machine.vm.network "private_network", ip: "10.0.10.13"
     machine.vm.hostname = "i2"
   end
  
   config.vm.define "dashboards1" do |machine|
+    machine.vm.provision :shell, inline: "sudo systemctl stop firewalld"
     machine.vm.network "private_network", ip: "10.0.10.14"
     machine.vm.hostname = "dashboards1"
   end
@@ -43,7 +52,7 @@ Vagrant.configure("2") do |config|
   config.vm.define 'controller' do |machine|
     machine.vm.network "private_network", ip: "10.0.10.15"
     machine.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=700,fmode=700"]
-    machine.vm.provision :shell, inline: "yum install java-1.8.0-openjdk -y"
+    machine.vm.provision :shell, inline: "sudo yum install java-1.8.0-openjdk -y"
     machine.vm.provision :ansible_local do |ansible|
       ansible.playbook          = "/vagrant/ansible-playbook/opensearch.yml"
       ansible.verbose           = true
