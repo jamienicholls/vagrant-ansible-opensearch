@@ -15,36 +15,36 @@ Vagrant.configure("2") do |config|
   config.vm.box = "generic/rocky8"
 
   config.vm.provider "virtualbox" do |v|
-    v.memory = 4096
+    v.memory = 3072
     v.cpus = 2
   end
 
   config.vm.define "m1" do |machine|
-    machine.vm.provision :shell, inline: "sudo yum install java-1.8.0-openjdk -y"
+    machine.vm.provision :shell, inline: "sudo systemctl stop firewalld"
     machine.vm.network "private_network", ip: "10.0.10.10"
     machine.vm.hostname = "m1"
   end
  
   config.vm.define "m2" do |machine|
-    #machine.vm.provision :shell, inline: "yum install java-1.8.0-openjdk -y"
+    machine.vm.provision :shell, inline: "sudo systemctl stop firewalld"
     machine.vm.network "private_network", ip: "10.0.10.11"
     machine.vm.hostname = "m2"
   end
 
   config.vm.define "i1" do |machine|
-    #machine.vm.provision :shell, inline: "yum install java-1.8.0-openjdk -y"
+    machine.vm.provision :shell, inline: "sudo systemctl stop firewalld"
     machine.vm.network "private_network", ip: "10.0.10.12"
     machine.vm.hostname = "i1"
   end
  
   config.vm.define "i2" do |machine|
-    #machine.vm.provision :shell, inline: "yum install java-1.8.0-openjdk -y"
+    machine.vm.provision :shell, inline: "sudo systemctl stop firewalld"
     machine.vm.network "private_network", ip: "10.0.10.13"
     machine.vm.hostname = "i2"
   end
  
   config.vm.define "dashboards1" do |machine|
-    #machine.vm.provision :shell, inline: "yum install java-1.8.0-openjdk -y"
+    machine.vm.provision :shell, inline: "sudo systemctl stop firewalld"
     machine.vm.network "private_network", ip: "10.0.10.14"
     machine.vm.hostname = "dashboards1"
   end

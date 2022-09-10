@@ -20,8 +20,8 @@ domain_name: example.com
 
 # Java memory heap values(GB) for opensearch
 # You can change it based on server specs
-xms_value: 1
-xmx_value: 1
+xms_value: 2
+xmx_value: 2
 
 # Cluster type whether its single-node or multi-node
 cluster_type: multi-node
@@ -56,7 +56,6 @@ oidc:
   client_secret: "00000000-0000-0000-0000-000000000000"
 
 # Overwrite demo configurations with your own
-#copy_custom_security_configs: false
 copy_custom_security_configs: false
 
 # To override demo configurations, you can use your own configuration files.
@@ -92,9 +91,10 @@ custom_security_plugin_configs:
 # execution (previously, the settings were updated only if the
 # /tmp/opensearch-nodecerts directory was missing on the server from which the
 # playbook was launched and new certificates were generated)
-iac_enable: false
+iac_enable: true
 
 
 admin_password: Test@123 
+opensearchadmin_password: Test@123 
 kibanaserver_password: Test@6789
 logstash_password: Test@9876
