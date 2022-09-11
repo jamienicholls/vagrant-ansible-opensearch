@@ -24,6 +24,20 @@ vagrant destroy -f
 There are a few known issues that have pending pull requests in place on the ansible-playbook GitHub repository, these may need to be updated prior to running vagrant up:
 - https://github.com/opensearch-project/ansible-playbook/pull/85/files
 - https://github.com/opensearch-project/ansible-playbook/pull/81/files
+```
+cd ansible-playbook
+git fetch origin pull/85/head:main
+git cherry-pick 092faaa
+git fetch origin pull/81/head:main
+git cherry-pick 645147d
+cd ..
+```
 
+Also the following will need to be added to wait for open search to start up before the task "Security Plugin configuration | Initialize the opensearch security index in opensearch" in the "/ansible-playbook/roles/linux/opensearch/tasks/security.yml".
+```
+- name: Pause for 1 minutes to start OpenSearch
+  pause:
+    minutes: 1
+```
 ## Customization
 You can customize this box by updating the `inventories/opensearch/hosts` file and `Vagrantfile`, adding or removing servers.
